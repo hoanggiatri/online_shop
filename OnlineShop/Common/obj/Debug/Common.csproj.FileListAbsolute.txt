@@ -1,0 +1,5 @@
+D:\Dev\C#\OnlineShop\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+D:\Dev\C#\OnlineShop\Common\bin\Debug\Common.dll
+D:\Dev\C#\OnlineShop\Common\bin\Debug\Common.pdb
+D:\Dev\C#\OnlineShop\Common\obj\Debug\Common.dll
+D:\Dev\C#\OnlineShop\Common\obj\Debug\Common.pdb

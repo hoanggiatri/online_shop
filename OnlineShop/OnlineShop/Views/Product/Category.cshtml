@@ -1,0 +1,149 @@
+﻿@model List<Model.ViewModel.ProductViewModel>
+@{
+    var category = (Model.EF.ProductCategory)ViewBag.Category;
+    ViewBag.Title = category.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section slide{
+    @{ Html.RenderAction("ProductCategory", "Product");}
+}
+<div class="w3l_banner_nav_right">
+    <div class="w3l_banner_nav_right_banner9 w3l_banner_nav_right_banner_pet">
+        <h4>Your Pet Favourite Food</h4>
+        <p>Sint occaecat cupidatat non proident</p>
+        <a href="single.html">Shop Now</a>
+    </div>
+    <div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
+        <h3 class="w3l_fruit">@category.Name</h3>
+        <!--
+        <div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left">
+                    <div class="hover14 column">
+
+                        <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                            <div class="agile_top_brand_left_grid_pos">
+                                <img src="~/Assets/client/images/offer.png" alt=" " class="img-responsive" />
+                            </div>
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="/chi-tiet/@item.MetaTitle-@item.ID"><img src="@item.Images" alt=" " class="img-responsive" /></a>
+                                            <p>@item.Name</p>
+                                            <h4>@item.PromotionPrice vnd<span>@item.Price vnd</span></h4>
+                                        </div>
+                                        <div class="snipcart-details">
+                                            <form action="#" method="post">
+                                                <fieldset>
+                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                    <input type="hidden" name="add" value="1" />
+                                                    <input type="hidden" name="business" value=" " />
+                                                    <input type="hidden" name="item_name" value="@item.Name" />
+                                                    <input type="hidden" name="amount" value="@item.PromotionPrice" />
+                                                    <input type="hidden" name="discount_amount" value="0" />
+                                                    <input type="hidden" name="currency_code" value="vnd" />
+                                                    <input type="hidden" name="return" value=" " />
+                                                    <input type="hidden" name="cancel_return" value=" " />
+                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="clearfix"> </div>
+        </div>
+-->
+        <div class="top-brands">
+            <div class="container">
+                <h3>New Product</h3>
+                <div class="agile_top_brands_grids">
+                    @foreach (var item in Model)
+                    {
+                        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                        <div class="col-md-3 top_brand_left">
+                            <div class="hover14 column">
+                                <div class="agile_top_brand_left_grid">
+                                    <div class="tag"><img src="~/Assets/client/images/tag.png" alt=" " class="img-responsive" /></div>
+                                    <div class="agile_top_brand_left_grid1">
+                                        <figure>
+                                            <div class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a href="@url"><img title=" " alt="@item.Name " src="@item.Images" /></a>
+                                                    <p>@item.Name</p>
+                                                    <h4>@item.Price vnd</h4>
+                                                </div>
+
+                                                <div class="snipcart-details top_brand_home_details">
+                                                    <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ</a></h4>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <!--Phân trang-->
+        @if (ViewBag.TotalPage >= 1)
+        {
+            var pageDisplay = (int)ViewBag.MaxPage;
+            int totalPage = (int)ViewBag.TotalPage;
+            int currentPage = ((int)ViewBag.Page);
+
+            //Create numeric links
+            var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+            var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+            var link = "/san-pham/" + category.MetaTitle + "-" + category.ID;
+            <nav>
+                <ul class="pagination">
+                    @if (currentPage > ViewBag.First)
+                    {
+                        <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                        <li>
+                            <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                        </li>
+
+                    }
+                    @for (int i = startPageIndex; i <= endPageIndex; i++)
+                    {
+                        if (currentPage == i)
+                        {
+
+                            <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
+                        }
+                    }
+                    @if (currentPage < totalPage)
+                    {
+                        <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                        <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                    }
+
+                </ul>
+            </nav>
+        }
+        else
+        {
+            <span>Không có bản ghi nào</span>
+        }
+
+    </div>
+</div>
+

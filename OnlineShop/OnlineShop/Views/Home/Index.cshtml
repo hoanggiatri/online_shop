@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var slides = (List<Model.EF.Slide>)ViewBag.Slides;
+    var listNewProduct = (List<Model.EF.Product>)ViewBag.NewProducts;
+    var listFeatureProduct = (List<Model.EF.Product>)ViewBag.ListFeatureProducts;
+}
+
+
+
+
+@section slide{
+    @{ Html.RenderAction("ProductCategory", "Product");}
+    <div class="w3l_banner_nav_right">
+        <section class="slider">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <div class="w3l_banner_nav_right_banner">
+                            <h3>Make your <span>food</span> with Spicy.</h3>
+                            <div class="more">
+                                <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
+                            </div>
+                        </div>
+                    </li>
+}
+
+<li>
+    <div class="w3l_banner_nav_right_banner1">
+        <h3>Make your <span>food</span> with Spicy.</h3>
+        <div class="more">
+            <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="w3l_banner_nav_right_banner2">
+        <h3>upto <i>50%</i> off.</h3>
+        <div class="more">
+            <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
+        </div>
+    </div>
+</li>
+</ul>
+</div>
+</section>
+<!-- flexSlider -->
+<link rel="stylesheet" href="~/Assets/client/css/flexslider.css" type="text/css" media="screen" property="" />
+<script defer src="~/Assets/client/js/jquery.flexslider.js"></script>
+<script type="text/javascript">
+    $(window).load(function () {
+        $('.flexslider').flexslider({
+            animation: "slide",
+            start: function (slider) {
+                $('body').removeClass('loading');
+            }
+        });
+    });
+</script>
+<!-- //flexSlider -->
+</div>
+<div class="banner_bottom">
+    <div class="wthree_banner_bottom_left_grid_sub">
+    </div>
+    <div class="wthree_banner_bottom_left_grid_sub1">
+        <div class="col-md-4 wthree_banner_bottom_left">
+            <div class="wthree_banner_bottom_left_grid">
+                <img src="~/Assets/client/images/4.jpg" alt=" " class="img-responsive" />
+                <div class="wthree_banner_bottom_left_grid_pos">
+                    <h4>Discount Offer <span>25%</span></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 wthree_banner_bottom_left">
+            <div class="wthree_banner_bottom_left_grid">
+                <img src="~/Assets/client/images/5.jpg" alt=" " class="img-responsive" />
+                <div class="wthree_banner_btm_pos">
+                    <h3>introducing <span>best store</span> for <i>groceries</i></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 wthree_banner_bottom_left">
+            <div class="wthree_banner_bottom_left_grid">
+                <img src="~/Assets/client/images/6.jpg" alt=" " class="img-responsive" />
+                <div class="wthree_banner_btm_pos1">
+                    <h3>Save <span>Upto</span> $10</h3>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<!-- new-product-->
+<div class="top-brands">
+    <div class="container">
+        <h3>New Product</h3>
+        <div class="agile_top_brands_grids">
+            @foreach (var item in listNewProduct)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="col-md-3 top_brand_left">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid">
+                            <div class="tag"><img src="~/Assets/client/images/tag.png" alt=" " class="img-responsive" /></div>
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="@url"><img title=" " alt="@item.Name " src="@item.Image" /></a>
+                                            <p>@item.Name</p>
+                                            <h4>@item.Price vnd</h4>
+                                        </div>
+                                        
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ</a></h4>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- //new-product-->
+<!-- top-brands -->
+<div class="top-brands">
+    <div class="container">
+        <h3>Hot Offers</h3>
+        <div class="agile_top_brands_grids">
+            @foreach (var item in listFeatureProduct)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="col-md-3 top_brand_left">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid">
+                            <div class="tag"><img src="~/Assets/client/images/tag.png" alt=" " class="img-responsive" /></div>
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="@url"><img title=" " alt="@item.Name " src="@item.Image" /></a>
+                                            <p>@item.Name</p>
+                                            <h4>@item.Price vnd</h4>
+                                        </div>
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ</a></h4>
+
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- //top-brands -->
+}
+
+
